@@ -31,10 +31,10 @@ User.init(
           args: [8, 100],
           msg: "Password must be at least 8 characters long",
         },
-        is: {
-          args: /^[a-zA-Z0-9!@#$%^&*()_+={}\[\]:;"'<>?,./\\-]*$/,
-          msg: "Password can only contain alphanumeric characters and special characters",
-        },
+        // is: {
+        //   args: /^[a-zA-Z0-9!@#$%^&*()_+={}\[\]:;"'<>?,./\\-]*$/,
+        //   msg: "Password can only contain alphanumeric characters and special characters",
+        // },
       },
     },
     userType: {
