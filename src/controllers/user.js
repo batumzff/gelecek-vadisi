@@ -25,9 +25,9 @@ module.exports.register = async (req, res) => {
 };
 
 module.exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
-  User.findOne({ where: { email } })
+  User.findOne({ where: { username } })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ message: "Invalid credentials" });
@@ -40,7 +40,7 @@ module.exports.login = async (req, res) => {
       res.status(200).json({
         message: "Login successful",
         user,
-        token: generateToken({ id: user.id, email: user.email }, "999d"),
+        token: generateToken({ id: user.id, username: user.username }, "999d"),
       });
     })
     .catch((err) => {

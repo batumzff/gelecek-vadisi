@@ -8,6 +8,10 @@ User.init(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: {
+        args: true,
+        msg: "Username already in use!",
+      },
 
       validate: {
         notEmpty: true,
@@ -17,10 +21,7 @@ User.init(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: {
-        args: true,
-        msg: "Email already in use!",
-      },
+      
       validate: { isEmail: true, notNull: true },
     },
     password: {
