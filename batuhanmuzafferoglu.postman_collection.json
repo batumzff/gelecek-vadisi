@@ -1,0 +1,489 @@
+{
+	"info": {
+		"_postman_id": "d758d8f5-0fd6-4901-b88e-0cfad01b3d0c",
+		"name": "BatuhanMuz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31214002"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {",
+							"    var response = pm.response.json();",
+							"        ",
+							"    if(pm.response.code === 201){",
+							"        pm.collectionVariables.set(\"userLoginUsername\", response.user.username);",
+							"        pm.collectionVariables.set(\"userLoginEmail\", response.user.email);",
+							"        pm.collectionVariables.set(\"auth_type\", \"Bearer\");",
+							"        pm.collectionVariables.set(\"auth_token\", response.token);",
+							"    } ",
+							"",
+							"    let requestData = JSON.parse(pm.request.body.raw);",
+							"    if (requestData.password) {",
+							"        pm.collectionVariables.set(\"userLoginPassword\", requestData.password);",
+							"    }",
+							"} catch (e) {",
+							"    console.error(\"Error:\", e.message);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"password\" : \"{{$randomPassword}}\",\n    \"username\" : \"{{$randomUserName}}\",\n    \"userType\" : \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}:{{port}}/api/auth/register",
+					"host": [
+						"{{domain}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {",
+							"    var response = pm.response.json();",
+							"        ",
+							"    if(pm.response.code === 200){",
+							"        pm.collectionVariables.set(\"userLoginUsername\", response.user.username);",
+							"        pm.collectionVariables.set(\"userLoginEmail\", response.user.email);",
+							"        pm.collectionVariables.set(\"auth_type\", \"Bearer\");",
+							"        pm.collectionVariables.set(\"auth_token\", response.token);",
+							"    } ",
+							"",
+							"    let requestData = JSON.parse(pm.request.body.raw);",
+							"    if (requestData.password) {",
+							"        pm.collectionVariables.set(\"userLoginPassword\", requestData.password);",
+							"    }",
+							"} catch (e) {",
+							"    console.error(\"Error:\", e.message);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"{{userLoginUsername}}\",\n    \"password\" : \"{{userLoginPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}:{{port}}/api/auth/login",
+					"host": [
+						"{{domain}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"page\": 1,\n    \"limit\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}:{{port}}/api/products",
+					"host": [
+						"{{domain}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Paginated",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"page\": 1,\n    \"limit\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}:{{port}}/api/products?page=1&limit=4",
+					"host": [
+						"{{domain}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {",
+							"    var response = pm.response.json();",
+							"        ",
+							"    if(pm.response.code === 201){",
+							"        pm.collectionVariables.set(\"product_id\", response.product.id);",
+							"    } ",
+							"",
+							"} catch (e) {",
+							"    console.error(\"Error:\", e.message);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{$randomProductName}}\",\n    \"description\": \"{{$randomJobDescriptor}}\",\n    \"quantity\": {{$randomInt}},\n    \"price\": {{$randomPrice}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}:{{port}}/api/products",
+					"host": [
+						"{{domain}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {",
+							"    var response = pm.response.json();",
+							"        ",
+							"    if(pm.response.code === 201){",
+							"        pm.collectionVariables.set(\"product_id\", response.product.id);",
+							"    } ",
+							"",
+							"} catch (e) {",
+							"    console.error(\"Error:\", e.message);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{$randomProductName}}\",\n    \"description\": \"{{$randomJobDescriptor}}\",\n    \"quantity\": {{$randomInt}},\n    \"price\": {{$randomPrice}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}:{{port}}/api/products/{{product_id}}",
+					"host": [
+						"{{domain}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"products",
+						"{{product_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {",
+							"    var response = pm.response.json();",
+							"        ",
+							"    if(pm.response.code === 200){",
+							"        pm.collectionVariables.set(\"product_id\", null);",
+							"    } ",
+							"",
+							"} catch (e) {",
+							"    console.error(\"Error:\", e.message);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}:{{port}}/api/products/{{product_id}}",
+					"host": [
+						"{{domain}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"products",
+						"{{product_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userLoginUsername",
+			"value": "root",
+			"type": "string"
+		},
+		{
+			"key": "userLoginEmail",
+			"value": "root@root.com",
+			"type": "string"
+		},
+		{
+			"key": "auth_type",
+			"value": "admin",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "domain",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "3000",
+			"type": "string"
+		},
+		{
+			"key": "userLoginPassword",
+			"value": "rootpass",
+			"type": "string"
+		},
+		{
+			"key": "product_id",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
