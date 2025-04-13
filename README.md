@@ -97,15 +97,15 @@ The application uses nodemon for development, which automatically restarts the s
 
 | Priority | Task | Description | Status |
 |----------|------|-------------|--------|
-| High | Add Error Handling Middleware | Implement a global error handling middleware for consistent error responses | - [ ] |
-| High | Add Request Logging | Implement request logging middleware for better debugging | - [ ] |
-| High | Add API Documentation | Create Swagger/OpenAPI documentation for all endpoints | - [ ] |
-| Low | Add Unit Tests | Implement unit tests for controllers and services | - [ ] |
-| Low | Add Integration Tests | Implement integration tests for API endpoints | - [ ] |
-| Low | Add Rate Limiting | Implement rate limiting for API endpoints | - [ ] |
-| Low | Add CORS Configuration | Implement proper CORS configuration | - [ ] |
-| Low | Add Health Check Endpoint | Implement health check endpoint for monitoring | - [ ] |
-| Low | Add API Versioning | Implement API versioning for future updates | - [ ] |
+| High | Add Error Handling Middleware | Implement a global error handling middleware for consistent error responses | - |
+| High | Add Request Logging | Implement request logging middleware for better debugging | - |
+| High | Add API Documentation | Create Swagger/OpenAPI documentation for all endpoints | - |
+| Low | Add Unit Tests | Implement unit tests for controllers and services | - |
+| Low | Add Integration Tests | Implement integration tests for API endpoints | - |
+| Low | Add Rate Limiting | Implement rate limiting for API endpoints | - |
+| Low | Add CORS Configuration | Implement proper CORS configuration | - |
+| Low | Add Health Check Endpoint | Implement health check endpoint for monitoring | - |
+| Low | Add API Versioning | Implement API versioning for future updates | - |
 
 ## License
 
